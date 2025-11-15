@@ -1,0 +1,24 @@
+[Unit]
+Description=cdtool
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/opt/cdtool/cdtool
+WorkingDirectory=/opt/cdtool
+Restart=always
+RestartSec=3
+User=root
+
+# set the path to your own dir
+Environment="CD_SCRIPT_PATH=/root/dev/gocd/cd.sh"
+# set your port
+Environment="PORT=30001"
+# set CD_TOKEN="<YOUR_TOEKN>" in the following path
+EnvironmentFile=-/etc/environment
+
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
